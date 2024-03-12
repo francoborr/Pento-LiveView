@@ -1,8 +1,6 @@
 defmodule PentoWeb.WrongLive do
   use PentoWeb, :live_view
 
-  alias Pento.Accounts
-
   def mount(_params, session, socket) do
     {:ok,
      assign(socket,
