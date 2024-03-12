@@ -65,4 +65,16 @@ defmodule PentoWeb.Router do
       live("/guess", WrongLive)
     end
   end
+
+  scope "/", PentoWeb do
+    pipe_through([:browser])
+    delete("/users/log_out", UserSessionController, :delete)
+    get("/", PageController, :home)
+
+    live_session :current_user,
+      on_mount: [{PentoWeb.UserAuth, :mount_current_user}] do
+      live("/users/confirm/:token", UserConfirmationLive, :edit)
+      live("/users/confirm", UserConfirmationInstructionsLive, :new)
+    end
+  end
 end
